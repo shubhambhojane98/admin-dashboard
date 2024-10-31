@@ -34,6 +34,11 @@ const ASidebar = () => {
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
+                    <Link href={"/admin/activity"}>Activity</Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
                     <SignOutButton />
                   </SidebarMenuButton>
                 </SidebarMenuItem>

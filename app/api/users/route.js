@@ -23,19 +23,3 @@ export async function POST(req) {
     status: 201,
   });
 }
-
-export async function DELETE(request, { params }) {
-  const { id } = await params;
-
-  const index = users.findIndex((user) => user.id === id);
-  if (index === -1) {
-    return NextResponse.json({ error: "User not found" }, { status: 404 });
-  }
-
-  users.splice(index, 1);
-
-  return NextResponse.json(
-    { message: "User deleted successfully" },
-    { status: 200 }
-  );
-}
