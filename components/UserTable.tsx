@@ -3,11 +3,18 @@ import React from "react";
 interface User {
   name: string;
   email: string;
+  phoneNo: string;
   role: string;
-  hasActiveMembership: boolean;
+  hasActiveMembership: string;
 }
 
-const UserTable = ({ name, email, role, hasActiveMembership }: User) => {
+const UserTable = ({
+  name,
+  email,
+  role,
+  hasActiveMembership,
+  phoneNo,
+}: User) => {
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
       <th
@@ -17,10 +24,9 @@ const UserTable = ({ name, email, role, hasActiveMembership }: User) => {
         {name}
       </th>
       <td className="px-6 py-4">{email}</td>
+      <td className="px-6 py-4">{phoneNo}</td>
       <td className="px-6 py-4">{role}</td>
-      <td className="px-6 py-4">
-        {hasActiveMembership ? "Active" : "InActive"}
-      </td>
+      <td className="px-6 py-4">{hasActiveMembership}</td>
       <td className="px-6 py-4 text-right">
         <a
           href="#"

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import UserTable from "@/components/UserTable";
+import Link from "next/link";
 import React from "react";
 
 const ManageUsers = async () => {
@@ -10,7 +11,9 @@ const ManageUsers = async () => {
   return (
     <div>
       <div className=" flex flex-col mb-5 items-end">
-        <Button>Add User</Button>
+        <Button>
+          <Link href="/admin/form">Add User</Link>
+        </Button>
       </div>
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -22,6 +25,9 @@ const ManageUsers = async () => {
               </th>
               <th scope="col" className="px-6 py-3">
                 Email
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Phone No
               </th>
               <th scope="col" className="px-6 py-3">
                 Role
@@ -43,6 +49,7 @@ const ManageUsers = async () => {
                 key={user.id}
                 name={user.name}
                 email={user.email}
+                phoneNo={user.phoneNo}
                 role={user.role}
                 hasActiveMembership={user.hasActiveMembership}
               />
