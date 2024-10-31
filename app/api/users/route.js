@@ -1,31 +1,5 @@
 import { NextResponse } from "next/server";
-
-let users = [
-  {
-    id: "1",
-    name: "Shubham",
-    email: "shubham@gmail.com",
-    phoneNo: "9818127849",
-    role: "user",
-    hasActiveMembership: "active",
-  },
-  {
-    id: "2",
-    name: "Rohan",
-    email: "rohan@gmail.com",
-    phoneNo: "9818127849",
-    role: "admin",
-    hasActiveMembership: "inactive",
-  },
-  {
-    id: "3",
-    name: "Yash",
-    phoneNo: "9818127849",
-    email: "yashn@gmail.com",
-    role: "user",
-    hasActiveMembership: "active",
-  },
-];
+import { users } from "@/helper/data";
 
 export async function GET() {
   return NextResponse.json(users, {
@@ -48,4 +22,20 @@ export async function POST(req) {
   return NextResponse.json(newUser, {
     status: 201,
   });
+}
+
+export async function DELETE(request, { params }) {
+  const { id } = await params;
+
+  const index = users.findIndex((user) => user.id === id);
+  if (index === -1) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+
+  users.splice(index, 1);
+
+  return NextResponse.json(
+    { message: "User deleted successfully" },
+    { status: 200 }
+  );
 }

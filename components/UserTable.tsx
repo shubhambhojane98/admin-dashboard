@@ -1,4 +1,9 @@
-import React from "react";
+"use client";
+import { users } from "@/helper/data";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import React, { useState } from "react";
 
 interface User {
   name: string;
@@ -6,6 +11,7 @@ interface User {
   phoneNo: string;
   role: string;
   hasActiveMembership: string;
+  id: string;
 }
 
 const UserTable = ({
@@ -14,7 +20,34 @@ const UserTable = ({
   role,
   hasActiveMembership,
   phoneNo,
+  id,
 }: User) => {
+  const [userList, setUserList] = useState(users);
+  const router = useRouter();
+
+  const handleDelete = async (id: string) => {
+    const confirmed = confirm("Are you sure you want to delete this user?");
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(`/api/users/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Error deleting user");
+      }
+
+      // Update the local user list to reflect the deletion
+      setUserList(userList.filter((user) => user.id !== id));
+      alert("User deleted successfully!");
+      router.refresh();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete user. Please try again.");
+    }
+  };
+
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
       <th
@@ -27,21 +60,16 @@ const UserTable = ({
       <td className="px-6 py-4">{phoneNo}</td>
       <td className="px-6 py-4">{role}</td>
       <td className="px-6 py-4">{hasActiveMembership}</td>
-      <td className="px-6 py-4 text-right">
-        <a
-          href="#"
-          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-        >
-          Edit
-        </a>
+      <td className="px-6 py-4 text-right text-blue-600">
+        <Link href={`/admin/editUser/${id}`}>Edit</Link>
       </td>
       <td className="px-6 py-4 text-right">
-        <a
-          href="#"
-          className="font-medium text-red-600 dark:text-red-500 hover:underline"
+        <p
+          onClick={() => handleDelete(id)}
+          className="font-medium text-red-600  hover:underline"
         >
           Delete
-        </a>
+        </p>
       </td>
     </tr>
   );

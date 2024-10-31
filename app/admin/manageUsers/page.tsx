@@ -47,6 +47,7 @@ const ManageUsers = async () => {
             {data.map((user: any) => (
               <UserTable
                 key={user.id}
+                id={user.id}
                 name={user.name}
                 email={user.email}
                 phoneNo={user.phoneNo}
