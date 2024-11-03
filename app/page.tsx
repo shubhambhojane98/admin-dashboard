@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -19,6 +20,20 @@ export default function Home() {
           <Button asChild className="mt-10">
             <Link href="/dashboard">Get Started</Link>
           </Button>
+        </div>
+        <div className="relative overflow-hidden pt-16">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <Image
+              alt="App Screenshots"
+              src="/dashboard.png"
+              width={2432}
+              height={1442}
+              className="mb-[-0%] rounded-xl shadow-2xl ring-1"
+            />
+            <div aria-hidden="true" className="relative">
+              <div className="absolute bottom-0 -inset-x-32 bg-gradient-to-t from-white/95 pt-[5%]" />
+            </div>
+          </div>
         </div>
       </div>
     </main>
