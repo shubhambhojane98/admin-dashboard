@@ -8,16 +8,15 @@ import { redirect } from "next/navigation";
 const Dashboard = async () => {
   const { sessionClaims } = await auth();
 
-  // Redirect to the appropriate route based on role
   if (sessionClaims?.metadata?.role === "admin") {
     redirect("/admin");
   } else if (sessionClaims?.metadata?.role === "user") {
     redirect("/user");
   } else {
-    redirect("/"); // Redirect to homepage or login if no valid role
+    redirect("/");
   }
 
-  return null; // No content to render since user is redirected;
+  return null;
 };
 
 export default Dashboard;
